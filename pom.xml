@@ -13,9 +13,13 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>ebankingPortal</name>
 	<description>eBankingPortal Asiggnment</description>
+
 	<properties>
 		<java.version>11</java.version>
+		<cucumber.version>6.10.4</cucumber.version>
+		<jacoco.version>0.8.7</jacoco.version>
 	</properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -62,8 +66,30 @@
 		<dependency>
 			<groupId>org.jacoco</groupId>
 			<artifactId>jacoco-maven-plugin</artifactId>
-			<version>0.8.7</version>
+			<version>${jacoco.version}</version>
 		</dependency>
+
+
+		<!-- Cucumber dependencies -->
+		<dependency>
+			<groupId>io.cucumber</groupId>
+			<artifactId>cucumber-java</artifactId>
+			<version>${cucumber.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>io.cucumber</groupId>
+			<artifactId>cucumber-junit-platform-engine</artifactId>
+			<version>${cucumber.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>io.cucumber</groupId>
+			<artifactId>cucumber-spring</artifactId>
+			<version>${cucumber.version}</version>
+			<scope>test</scope>
+		</dependency>
+
 	</dependencies>
 
 	<build>
