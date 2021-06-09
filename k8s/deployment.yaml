@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: ebank-api-deploy
+  name: ebank-api-deploy
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: ebank-api-pod
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: ebank-api-pod
+    spec:
+      containers:
+      - image: ebank-api
+        name: ebank-api-container
+        imagePullPolicy: Never
+        ports:
+          - containerPort: 8080
+        resources: {}
+status: {}
