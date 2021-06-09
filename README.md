@@ -8,6 +8,10 @@
 
 ### Building Docker Image 
 
+Set Docker registry to local minikube
+```shell
+eval $(minikube docker-env)
+```
 
 **Build Image**
 ```shell
@@ -19,16 +23,15 @@ $ ./scripts/build-docker.sh
 
 ```shell
 $ docker image ls
-
-REPOSITORY                    TAG                 IMAGE ID       CREATED          SIZE
-ebankingportal-api            latest              fb7764aa37d8   12 minutes ago   377MB
-gcr.io/k8s-minikube/kicbase   v0.0.15-snapshot4   06db6ca72446   5 months ago     941MB
-(base) admin@Admins-MacBook-Pro ebankingPortal %
+REPOSITORY                                TAG                       IMAGE ID       CREATED          SIZE
+ebank-api                                 latest                    71959cb10e8e   45 seconds ago   377MB
+<none>                                    <none>                    a6eb2a334a9f   13 days ago      22.6MB
+$
 ```
 
 **Verify Image is runnable**
 ```shell
-$ docker run -p 8080:8080 ebankingportal-api
+$ docker run -p 8080:8080 ebank-api
 ```
 Open your browser and hit http://localhost:8080/version
 
@@ -40,3 +43,5 @@ View report at your
 
 ### References taken from
 1. **Cucumber** [Cucumber-Junit-Spring Boot Integration](https://sergiomartinrubio.com/articles/cucumber-a-bdd-framework-for-java-and-spring/)
+2. **Running Local Docker Images in Kubernetes**  [Local Docker + Minikube](https://dzone.com/articles/running-local-docker-images-in-kubernetes-1)
+3. **C4 Modelling** [C4 Diagram explained](https://youtu.be/x2-rSnhpw0g), [C4 Official website](https://c4model.com) 

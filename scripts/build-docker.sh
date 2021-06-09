@@ -1,3 +1,3 @@
 ./bin/bash
 
-docker build -t ebankingportal-api .
+docker build -t ebank-api .
