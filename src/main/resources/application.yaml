@@ -1,0 +1,12 @@
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger.html
+    operationsSorter: method
+
+
+application-description: eBanking API portal
+application-version: @project.version@
+
+
