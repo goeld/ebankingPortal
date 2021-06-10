@@ -6,7 +6,7 @@ metadata:
     app: ebank-api-deploy
   name: ebank-api-deploy
 spec:
-  replicas: 5
+  replicas: 1
   selector:
     matchLabels:
       app: ebank-api-pod
@@ -17,11 +17,22 @@ spec:
       labels:
         app: ebank-api-pod
     spec:
+#      securityContext:
+#        runAsUser: 1000
+#        runAsGroup: 3000
+#        fsGroup: 2000
       containers:
       - image: ebank-api
         name: ebank-api-container
         imagePullPolicy: Never
         ports:
           - containerPort: 8080
+        volumeMounts:
+          - mountPath: /logs/
+            name: logs-volume
         resources: {}
+      volumes:
+        - name: logs-volume
+          persistentVolumeClaim:
+            claimName: ebanking-api-pvc
 status: {}

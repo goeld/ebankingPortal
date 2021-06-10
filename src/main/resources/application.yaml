@@ -5,8 +5,12 @@ springdoc:
     path: /swagger.html
     operationsSorter: method
 
-
-application-description: eBanking API portal
-application-version: @project.version@
-
-
+logging:
+  file:
+    name: application.log
+    path: /logs/
+  level:
+    root: info
+    org.springframework: warn
+    org.hibernate: error
+    com.mycompany.api: info
