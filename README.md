@@ -1,7 +1,13 @@
 # ebankingPortal
 
 
+## Assumptions
+When running the code with minikube it will require to start the services manually so the application can be acessible via browser as below
 
+```shell
+$ minikube service <name of the service>
+$ minikube service ebank-api-svc
+```
 
 
 # Build Run Test
