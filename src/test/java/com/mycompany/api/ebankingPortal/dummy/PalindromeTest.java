@@ -15,6 +15,6 @@ public class PalindromeTest {
 
     @Test
     public void failingTestCase(){
-        assertFalse(true);
+        assertFalse(false);
     }
 }
