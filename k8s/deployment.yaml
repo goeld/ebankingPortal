@@ -26,11 +26,25 @@ spec:
         name: ebank-api-container
         imagePullPolicy: Never
         ports:
-          - containerPort: 8080
+          - name: liveness-port
+            containerPort: 8080
         volumeMounts:
           - mountPath: /logs/
             name: logs-volume
         resources: {}
+        livenessProbe:
+          httpGet:
+            path: /version
+            port: liveness-port
+          initialDelaySeconds: 10
+          periodSeconds: 5
+        readinessProbe:
+          httpGet:
+            path: /version
+            port: liveness-port
+          initialDelaySeconds: 5
+          failureThreshold: 3
+          periodSeconds: 15
       volumes:
         - name: logs-volume
           persistentVolumeClaim:
