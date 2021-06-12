@@ -1,4 +1,4 @@
-package com.mycompany.api.ebankingPortal.dummy.stepdefs;
+package com.mycompany.api.ebankingPortal.health.stepdefs;
 
 import com.mycompany.api.ebankingPortal.configuration.CucumberSpringContextConfiguration;
 import io.cucumber.java.en.Given;
