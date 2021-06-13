@@ -2,11 +2,22 @@
 
 
 ## Assumptions
-When running the code with minikube it will require to start the services manually so the application can be acessible via browser as below
+
+### Persistent Volumes are created 
+Assume you have admin access to cluster and have created the required persistent volumes. Below are the instructions to create PV using minikube
+```shell
+$ minikube ssh
+$ mkdir -p /mnt/data/ebank-api
+$ mkdir -p /mnt/data/mock-services
+```
+
+### Minikube services are executed manually
+When running the pods using minikube it will require to start the services manually, so the application can be acessible via browser as below
 
 ```shell
 $ minikube service <name of the service>
 $ minikube service ebank-api-svc
+$ minikube service mock-services-svc
 ```
 
 
