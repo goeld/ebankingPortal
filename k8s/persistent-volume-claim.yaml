@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: ebanking-api-pvc
+  name: ebank-api-pvc
 spec:
   storageClassName: ""
   resources:
@@ -9,4 +9,4 @@ spec:
       storage: 1Gi
   accessModes:
     - ReadWriteOnce
-  volumeName: ebanking-api-pv
+  volumeName: ebank-api-pv

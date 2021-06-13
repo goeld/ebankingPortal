@@ -17,10 +17,6 @@ spec:
       labels:
         app: ebank-api-pod
     spec:
-#      securityContext:
-#        runAsUser: 1000
-#        runAsGroup: 3000
-#        fsGroup: 2000
       containers:
       - image: ebank-api
         name: ebank-api-container
@@ -34,13 +30,13 @@ spec:
         resources: {}
         livenessProbe:
           httpGet:
-            path: /version
+            path: /ebanking/health
             port: liveness-port
           initialDelaySeconds: 10
           periodSeconds: 5
         readinessProbe:
           httpGet:
-            path: /version
+            path: /ebanking/health
             port: liveness-port
           initialDelaySeconds: 5
           failureThreshold: 3
@@ -48,5 +44,5 @@ spec:
       volumes:
         - name: logs-volume
           persistentVolumeClaim:
-            claimName: ebanking-api-pvc
+            claimName: ebank-api-pvc
 status: {}
