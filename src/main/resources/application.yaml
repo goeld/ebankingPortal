@@ -5,6 +5,13 @@ springdoc:
     path: /swagger.html
     operationsSorter: method
 
+server:
+  ssl:
+    key-store: ${tomcat_key_store_path}
+    key-store-password: ${tomcat_key_store_pwd}
+    key-store-type: ${tomcat_key_store_type}
+    key-alias: ${tomcat_key_store_alias}
+
 logging:
   file:
     name: application.log
