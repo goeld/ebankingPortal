@@ -3,3 +3,8 @@ logging:
     path: /logs/
   level:
     com.mycompany.api: trace
+
+tomcat_key_store_path: classpath:certs/keystore.p12
+tomcat_key_store_pwd: changeit
+tomcat_key_store_type: PKCS12
+tomcat_key_store_alias: tomcat

@@ -11,6 +11,30 @@ $ mkdir -p /mnt/data/ebank-api
 $ mkdir -p /mnt/data/mock-services
 ```
 
+### Certificates are created.
+Refer to command to create certificates if not done
+```shell
+(base) admin@Admins-MacBook-Pro certs % keytool -genkeypair -alias tomcat -keyalg RSA -keysize 2048 -storetype PKCS12 -keystore keystore.p12 -validity 365
+Enter keystore password:  
+Re-enter new password: 
+What is your first and last name?
+  [Unknown]:  deepak
+What is the name of your organizational unit?
+  [Unknown]:  sp
+What is the name of your organization?
+  [Unknown]:  sp
+What is the name of your City or Locality?
+  [Unknown]:  sg
+What is the name of your State or Province?
+  [Unknown]:  sg
+What is the two-letter country code for this unit?
+  [Unknown]:  sg
+Is CN=deepak, OU=sp, O=sp, L=sg, ST=sg, C=sg correct?
+  [no]:  y
+
+```
+
+
 ### Minikube services are executed manually
 When running the pods using minikube it will require to start the services manually, so the application can be acessible via browser as below
 
@@ -66,32 +90,38 @@ View report at your
 # Deliverables Checklist
 
 |Deliverable|Type|Item|Status|Remarks|
-|:-----|:-----:|:--------|:---------------|:-----|
-|Code|Docker  | Build Dokcer image | In progress| |
-|Code|K8s | Except Services | In Progress| |
-|Code|K8s | Services for Microservice comm | Not started| |
-|Code|Swagger/Open API Integration| |In Progress| |
-|Code|Logging | | In progress| |
-|Code|Monitoring | |In progress | |
-|Code|Springboot Webapp | | In progress| |
-|Code|Git Repository | |In progress | |
-|Code|Solution evolution  | |In Progress | Refer to branches in the repo. They almost (not exactly) in the sequence. |
-|Code|Kafka Integration| |Not started| |
-|Code|Mock Application | | Not started | To mock the data for customer, accoount <b> exchange rate and SSO|
-|Code|Security | Authentication & Authorisation |Not Started | |
+|:-----|:-----|:--------|:---------------|:-----|
+|Code|Docker  | Build 2 Dokcer images | Completed| |
+|Code|K8s | Except Services - <br />Pod, deployment, PV, PVC | Completed| K8s Services for interpod communication |
+|Code|Git Repository| 2 Git Repos |Completed | To simulate Microservice, one of the repo is mock repo with  <br /> multi module springboot project|
+|Code|Link Repo with pipeline | Git + Circle CI |Completed | Able to see CI on each commit|
+|Code|Working Pipeline | Circle CI |Completed | emails for failed builds|
+|Documentation|Architecture Diagram | High level arch diagram| Completed| Refer to eBanking Portal API and documents folder.|
+|Code|Logging |  | Completed| Logging to files and on Persistent volumes on Pods|
+|Code|Monitoring | |Completed |Pod monitoring has been added for liveness and readiness |
+|Code|Solution evolution  | |Completed | Refer to branches in the repo or git logs.|
+|Code|Swagger/Open API Integration| |In Progress|Pending business logic |
+|Documentation|C4 Diagram | Context, Container <br />and Component diagram| In Progress| Pending Component diagram|
+|Code|Springboot Webapps | | In Progess| Pending business logic. <br />Application is able to access outside K8s <br />via browser etc.  |
+|Code|Mock Application | | In Progress | To mock the data for customer, account, transactions and <br /> exchange rate and authentication|
+|Code|Security | Authentication & Authorisation |In Progress | |
+|Code|Testing | Unit Testing | In Progress|Pending business logic |
+|Code|Testing | Integration Testing| In Progress| Pending business logic|
+|Code|Testing | Functional Testing| In Progress| |
+|Documentation|Read me | | In progress| |
+|Documentation|Solution evolution  | |In Progress | |
+|Documentation|Code organisation | |In Progress| |
+|Documentation|Relevant Decisions, Assumptions made | |In Progress | |
+|Code|Kafka Integration| |Not started|Pending business logic |
 |Code|Security | Data Security - In Transit | Not started | |
 |Code|Security | Data Security - At rest| Not started| |
-|Code|Testing | Unit Testing | Not started| |
-|Code|Testing | Integration Testing| Not started| |
-|Code|Testing | Functional Testing| Not started| |
-|Code|Testing | API contract test| Not started| |
-|Code|Link Repo with pipeline | |Not started | |
-|Code|Working Pipeline | |Not started | |
-|Documentation|C4 Diagram | | In progress| Refer to eBanking Portal API and documents folder.|
-|Documentation|Architecture Diagram | | In progress| Refer to eBanking Portal API and documents folder.|
-|Documentation|Read me | | In progress| |
-|Documentation|Solution evolution  | |Not started | |
-|Documentation|Code organisation | | | |
-|Documentation|Relevant Decisions, Assumptions made | | | |
-|Documentation|Swagger Documentation | | Not started| |
+|Code|K8s | Services for inter pod comm | Not started| |
+|Code|Testing | API contract test| Not started| s |
+
+
+
+
+<br >
+<br >
+s
 
