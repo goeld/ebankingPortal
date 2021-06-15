@@ -1,4 +1,4 @@
-package com.mycompany.api.ebankingPortal.health;
+package com.mycompany.api.ebankingPortal.version;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -6,13 +6,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class EBankingHealthController {
-    @GetMapping("/ebanking/health")
+public class EBankingVersionController {
+    @GetMapping("/ebanking/version")
     public String getVersion() {
         return "1.0";
     }
 
-    Logger logger = LoggerFactory.getLogger(EBankingHealthController.class);
+    Logger logger = LoggerFactory.getLogger(EBankingVersionController.class);
 
     @GetMapping("/")
     public String index() {

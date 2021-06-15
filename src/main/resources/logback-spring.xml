@@ -38,13 +38,7 @@
         <appender-ref ref="Console" />
     </root>
 
-    <!-- LOG everything at Debug level -->
-    <root level="debug">
-        <appender-ref ref="RollingFile" />
-        <appender-ref ref="Console" />
-    </root>
-
-    <!-- LOG "com.baeldung*" at TRACE level -->
+    <!-- LOG "com.mycompany.api.*" at Info level -->
     <logger name="com.mycompany.api" level="info" additivity="false">
         <appender-ref ref="RollingFile" />
         <appender-ref ref="Console" />
