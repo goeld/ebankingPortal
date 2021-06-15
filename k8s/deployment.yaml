@@ -30,13 +30,13 @@ spec:
         resources: {}
         livenessProbe:
           httpGet:
-            path: /ebanking/health
+            path: /actuator/health
             port: liveness-port
           initialDelaySeconds: 10
           periodSeconds: 5
         readinessProbe:
           httpGet:
-            path: /ebanking/health
+            path: /ebanking/version
             port: liveness-port
           initialDelaySeconds: 5
           failureThreshold: 3
