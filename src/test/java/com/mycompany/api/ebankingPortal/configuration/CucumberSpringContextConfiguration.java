@@ -11,7 +11,4 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 @AutoConfigureMockMvc
 public class CucumberSpringContextConfiguration {
 
-    @Autowired
-    protected TestRestTemplate restTemplate;
-
 }

@@ -1,4 +1,4 @@
-package com.mycompany.api.ebankingPortal.health.stepdefs;
+package com.mycompany.api.ebankingPortal.application.health;
 
 import com.mycompany.api.ebankingPortal.configuration.CucumberSpringContextConfiguration;
 import io.cucumber.java.en.Then;
@@ -18,15 +18,23 @@ public class HealthFeatureTest extends CucumberSpringContextConfiguration {
     private MockMvc mockMvc;
 
     @When("Application starts")
-    public void when_method() {
+    public void application_start() {
         System.out.println("Cucumber - when ");
     }
 
     @Then("health status is up")
-    public void then_method() throws Exception {
+    public void health_is_up() throws Exception {
         mockMvc.perform(get("/actuator/health"))
                 .andExpect(status().isOk())
                 .andExpect(content()
                         .json("{\"status\":\"UP\"}"));
+    }
+
+    @Then("it is ready to serve customers")
+    public void when_app_started() throws Exception {
+        mockMvc.perform(get("/ebanking/version"))
+                .andExpect(status().isOk())
+                .andExpect(content()
+                        .string("1.0"));
     }
 }
