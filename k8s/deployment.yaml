@@ -21,8 +21,6 @@ spec:
       - image: ebank-api
         name: ebank-api-container
         imagePullPolicy: Never
-        command: ["spring.profiles.active"]
-        args: ["k8s"]
         ports:
           - name: liveness-port
             containerPort: 8080

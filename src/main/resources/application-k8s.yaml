@@ -1,0 +1,2 @@
+tomcat_ssl_enabled: false
+exchange_rate_url: http://localhost:8091/exchange-rate/getAll
