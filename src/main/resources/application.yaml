@@ -7,11 +7,15 @@ springdoc:
 
 server:
   ssl:
-    enabled: false
+    enabled: ${tomcat_ssl_enabled:false}
     key-store: ${tomcat_key_store_path}
     key-store-password: ${tomcat_key_store_pwd}
     key-store-type: ${tomcat_key_store_type}
     key-alias: ${tomcat_key_store_alias}
+
+services:
+  url:
+    exchange-rate: ${exchange_rate_url}
 
 logging:
   file:

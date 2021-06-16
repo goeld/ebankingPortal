@@ -11,6 +11,8 @@ public class EbankingPortalApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(EbankingPortalApplication.class, args);
+
+
 	}
 
 }

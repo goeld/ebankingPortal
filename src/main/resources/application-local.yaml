@@ -4,7 +4,14 @@ logging:
   level:
     com.mycompany.api: trace
 
+## SSL Certificate Details
+tomcat_ssl_enabled: true
 tomcat_key_store_path: classpath:certs/keystore.p12
 tomcat_key_store_pwd: changeit
 tomcat_key_store_type: PKCS12
 tomcat_key_store_alias: tomcat
+
+
+
+## Third party service URL
+exchange_rate_url: http://localhost:8091/exchange-rate/getAll
