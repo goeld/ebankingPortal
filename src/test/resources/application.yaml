@@ -1,3 +1,7 @@
 server:
   ssl:
     enabled: false
+
+services:
+  url:
+    exchange-rate: http://dummy/exchange_rate
