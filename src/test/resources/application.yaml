@@ -8,3 +8,4 @@ services:
     customer-account-service-customer: http://dummy/customer/account/{customerId}
     customer-account-service-customer-currency: http://dummy/customer/account/{customerId}/{currency}
     account-transaction-service: http://dummy/txn/accountTransactions
+    authenticate-service: http://dummy/sso/authenticate/customer?customerId=ll
