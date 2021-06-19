@@ -10,6 +10,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
@@ -30,7 +31,7 @@ public class AuthenticationValidationServiceImpl implements AuthenticationValida
         logger.info("Calling Auth service to validate token and get Customer");
         List<String> authorization = headers.get("authorization");
 
-        if (authorization == null|| authorization.size() == 0) {
+        if (CollectionUtils.isEmpty(authorization) || authorization.get(0) == null || authorization.get(0).trim().length() == 0) {
             logger.error("Invalid user request");
             throw new BadRequestException("Invalid authentication details");
         }

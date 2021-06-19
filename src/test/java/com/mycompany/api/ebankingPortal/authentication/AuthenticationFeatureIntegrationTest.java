@@ -81,10 +81,27 @@ public class AuthenticationFeatureIntegrationTest {
         headers.add("authorization", "mock_customer_id");
     }
 
+    @When("Authentication Header is null")
+    public void authentication_header_is_null() {
+        headers = new HttpHeaders();
+        headers.add("authorization", null);
+    }
+
+    @When("Authentication Header is {string}")
+    public void authentication_header_is(String string) {
+        headers = new HttpHeaders();
+        headers.add("authorization", string);
+    }
+
     @When("Authentication Header is not set")
     public void when_authentication_header_is_missing() {
-        // No Authentication headers are set
         headers = new HttpHeaders();
+    }
+
+    @When("Authentication Header is empty")
+    public void when_authentication_header_is_empty() {
+        headers = new HttpHeaders();
+        headers.add("authorization", "");
     }
 
     @When("customerId is invalid")
@@ -119,13 +136,18 @@ public class AuthenticationFeatureIntegrationTest {
         }).getMessage();
     }
 
+    @Then("{string} message is shown")
+    public void message_is_shown(String string) {
+        Assertions.assertEquals(string, this.exceptionMessage);
+    }
+
     @Then("'Invalid Customer' message is shown")
     public void verify_invalid_customer_message() {
         Assertions.assertEquals("Invalid Customer", this.exceptionMessage);
     }
 
     @Then("'Invalid authentication details' message is shown")
-    public void verify_bad_request_message() {
+    public void verify_invalid_authentication_details_message() {
         Assertions.assertEquals("Invalid authentication details", this.exceptionMessage);
     }
 
