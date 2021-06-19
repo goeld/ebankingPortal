@@ -1,4 +1,4 @@
-package com.mycompany.api.ebankingPortal.customer;
+package com.mycompany.api.ebankingPortal.customerAccount;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;

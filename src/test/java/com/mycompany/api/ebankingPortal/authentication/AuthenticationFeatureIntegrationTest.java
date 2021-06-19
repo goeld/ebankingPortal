@@ -2,7 +2,7 @@ package com.mycompany.api.ebankingPortal.authentication;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.mycompany.api.ebankingPortal.customer.AccountException;
+import com.mycompany.api.ebankingPortal.exception.CustomerAccountException;
 import com.mycompany.api.ebankingPortal.customerAccountTransaction.*;
 import com.mycompany.api.ebankingPortal.exception.*;
 import io.cucumber.java.en.Then;
@@ -152,7 +152,7 @@ public class AuthenticationFeatureIntegrationTest {
     }
 
     @Then("System should authenticate the request")
-    public void system_authenticate_the_request() throws URISyntaxException, JsonProcessingException, NoTransactionException, AccountException, ForbiddenException, BadRequestException, InvalidCustomerException {
+    public void system_authenticate_the_request() throws URISyntaxException, JsonProcessingException, NoTransactionException, CustomerAccountException, ForbiddenException, BadRequestException, InvalidCustomerException {
 
         // Mock - Authentication Rest API Call
         CustomerDetails customerDetails = new CustomerDetails("mock_customer_id");

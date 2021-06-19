@@ -1,4 +1,4 @@
-package com.mycompany.api.ebankingPortal.customer;
+package com.mycompany.api.ebankingPortal.customerAccount;
 
 import com.mycompany.api.ebankingPortal.exception.NoTransactionException;
 
