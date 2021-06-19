@@ -13,7 +13,7 @@ public class EBankingPortalBeans {
     private RestTemplateBuilder restTemplateBuilder;
 
     @Bean
-    public RestTemplate restTemplate(){
+    public RestTemplate restTemplate() {
         RestTemplate restTemplate = restTemplateBuilder
                 .errorHandler(new RestTemplateResponseErrorHandler())
                 .build();

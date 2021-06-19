@@ -1,4 +1,4 @@
-package com.mycompany.api.ebankingPortal.service;
+package com.mycompany.api.ebankingPortal.exchangerate;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -29,19 +29,16 @@ import static org.springframework.test.web.client.response.MockRestResponseCreat
 @Cucumber
 public class ExchangeRateServiceFeatureTest extends CucumberSpringContextConfiguration {
 
+    Map<String, Double> actualExchangeRates;
     @Autowired
     private ExchangeRateService exchangeRateService;
-
     @Autowired
     private RestTemplate restTemplate;
-
     @Value("${services.url.exchange-rate}")
     private String exchangeRateUrl;
-
     private MockRestServiceServer mockServer;
     private ObjectMapper mapper = new ObjectMapper();
     private Map<String, Double> exchangeRateMap;
-    Map<String, Double> actualExchangeRates;
 
     private Map<String, Double> mock_exchange_rates() {
         Map<String, Double> rates = new HashMap<>();

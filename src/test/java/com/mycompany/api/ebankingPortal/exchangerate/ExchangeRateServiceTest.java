@@ -1,4 +1,4 @@
-package com.mycompany.api.ebankingPortal.service;
+package com.mycompany.api.ebankingPortal.exchangerate;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -16,9 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.client.ExpectedCount;
 import org.springframework.test.web.client.MockRestServiceServer;
-import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 import java.net.URI;
 import java.util.HashMap;

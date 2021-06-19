@@ -7,7 +7,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.ResponseErrorHandler;
-import org.webjars.NotFoundException;
 
 import java.io.IOException;
 
