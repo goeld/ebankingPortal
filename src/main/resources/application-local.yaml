@@ -15,3 +15,6 @@ tomcat_key_store_alias: tomcat
 
 ## Third party service URL
 exchange_rate_url: http://localhost:8091/exchange-rate/getAll
+customer_account_service_customer_url: http://localhost:8091/customer/account/{customerId}
+customer_account_service_customer_currency_url: http://localhost:8091/customer/account/{customerId}/{currency}
+account_transaction_service_url: http://localhost:8091/txn/accountTransactions

@@ -5,3 +5,6 @@ server:
 services:
   url:
     exchange-rate: http://dummy/exchange_rate
+    customer-account-service-customer: http://dummy/customer/account/{customerId}
+    customer-account-service-customer-currency: http://dummy/customer/account/{customerId}/{currency}
+    account-transaction-service: http://dummy/txn/accountTransactions

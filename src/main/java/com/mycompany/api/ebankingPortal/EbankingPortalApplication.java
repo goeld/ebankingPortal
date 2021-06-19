@@ -9,10 +9,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @OpenAPIDefinition(info = @Info(title = "eBanking Portal API", version = "0.0.1", description = "eBanking API for customer account transactions"))
 public class EbankingPortalApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(EbankingPortalApplication.class, args);
+    public static void main(String[] args) {
+        SpringApplication.run(EbankingPortalApplication.class, args);
 
 
-	}
+    }
 
 }

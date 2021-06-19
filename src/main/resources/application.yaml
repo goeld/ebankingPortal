@@ -16,6 +16,9 @@ server:
 services:
   url:
     exchange-rate: ${exchange_rate_url}
+    customer-account-service-customer: ${customer_account_service_customer_url}
+    customer-account-service-customer-currency: ${customer_account_service_customer_currency_url}
+    account-transaction-service: ${account_transaction_service_url}
 
 logging:
   file:

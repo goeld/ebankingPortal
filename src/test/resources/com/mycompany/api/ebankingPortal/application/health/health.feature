@@ -5,5 +5,5 @@ Feature: Able to run the application
   Scenario: Able to run the application and ensure it is up
     When Application starts
     Then health status is up
-         And it is ready to serve customers
+    And it is ready to serve customers
 

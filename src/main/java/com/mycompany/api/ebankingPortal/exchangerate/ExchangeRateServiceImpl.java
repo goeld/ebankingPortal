@@ -1,4 +1,4 @@
-package com.mycompany.api.ebankingPortal.service;
+package com.mycompany.api.ebankingPortal.exchangerate;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -8,11 +8,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.List;
 import java.util.Map;
 
 @Service
-public class ExchangeRateService {
+public class ExchangeRateServiceImpl implements ExchangeRateService {
 
     @Autowired
     private RestTemplate restTemplate;
@@ -27,6 +26,4 @@ public class ExchangeRateService {
                 });
         return responseEntity.getBody();
     }
-
-
 }
