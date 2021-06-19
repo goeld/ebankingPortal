@@ -2,11 +2,11 @@ package com.mycompany.api.ebankingPortal.customerAccountTransaction;
 
 import com.mycompany.api.ebankingPortal.authentication.AuthenticationValidationService;
 import com.mycompany.api.ebankingPortal.authentication.CustomerDetails;
-import com.mycompany.api.ebankingPortal.exception.CustomerAccountException;
+import com.mycompany.api.ebankingPortal.customerAccount.CustomerAccountException;
 import com.mycompany.api.ebankingPortal.exception.BadRequestException;
 import com.mycompany.api.ebankingPortal.exception.ForbiddenException;
-import com.mycompany.api.ebankingPortal.exception.InvalidCustomerException;
-import com.mycompany.api.ebankingPortal.exception.NoTransactionException;
+import com.mycompany.api.ebankingPortal.authentication.InvalidCustomerException;
+import com.mycompany.api.ebankingPortal.transaction.NoTransactionException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

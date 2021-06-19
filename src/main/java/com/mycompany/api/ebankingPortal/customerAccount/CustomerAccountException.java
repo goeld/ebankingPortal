@@ -1,4 +1,4 @@
-package com.mycompany.api.ebankingPortal.exception;
+package com.mycompany.api.ebankingPortal.customerAccount;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

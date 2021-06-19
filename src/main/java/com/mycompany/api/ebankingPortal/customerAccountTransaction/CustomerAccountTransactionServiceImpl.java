@@ -1,9 +1,9 @@
 package com.mycompany.api.ebankingPortal.customerAccountTransaction;
 
-import com.mycompany.api.ebankingPortal.exception.CustomerAccountException;
+import com.mycompany.api.ebankingPortal.customerAccount.CustomerAccountException;
 import com.mycompany.api.ebankingPortal.customerAccount.CustomerAccountDetails;
 import com.mycompany.api.ebankingPortal.customerAccount.CustomerAccountService;
-import com.mycompany.api.ebankingPortal.exception.NoTransactionException;
+import com.mycompany.api.ebankingPortal.transaction.NoTransactionException;
 import com.mycompany.api.ebankingPortal.transaction.TransactionRequest;
 import com.mycompany.api.ebankingPortal.transaction.TransactionResponse;
 import com.mycompany.api.ebankingPortal.transaction.TransactionService;

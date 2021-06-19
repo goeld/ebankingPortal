@@ -2,9 +2,10 @@ package com.mycompany.api.ebankingPortal.authentication;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.mycompany.api.ebankingPortal.exception.CustomerAccountException;
+import com.mycompany.api.ebankingPortal.customerAccount.CustomerAccountException;
 import com.mycompany.api.ebankingPortal.customerAccountTransaction.*;
 import com.mycompany.api.ebankingPortal.exception.*;
+import com.mycompany.api.ebankingPortal.transaction.NoTransactionException;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.cucumber.junit.platform.engine.Cucumber;
