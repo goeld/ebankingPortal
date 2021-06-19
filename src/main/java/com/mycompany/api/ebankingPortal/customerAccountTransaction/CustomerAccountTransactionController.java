@@ -2,7 +2,7 @@ package com.mycompany.api.ebankingPortal.customerAccountTransaction;
 
 import com.mycompany.api.ebankingPortal.authentication.AuthenticationValidationService;
 import com.mycompany.api.ebankingPortal.authentication.CustomerDetails;
-import com.mycompany.api.ebankingPortal.customer.AccountException;
+import com.mycompany.api.ebankingPortal.exception.CustomerAccountException;
 import com.mycompany.api.ebankingPortal.exception.BadRequestException;
 import com.mycompany.api.ebankingPortal.exception.ForbiddenException;
 import com.mycompany.api.ebankingPortal.exception.InvalidCustomerException;
@@ -36,7 +36,7 @@ public class CustomerAccountTransactionController {
     public ResponseEntity<CustomerAccountTransactionResponse> getCustomerTransactions(
             @RequestBody CustomerTransactionRequest customerTransactionRequest,
             @RequestHeader HttpHeaders headers)
-            throws AccountException, ForbiddenException, BadRequestException, NoTransactionException, InvalidCustomerException {
+            throws CustomerAccountException, ForbiddenException, BadRequestException, NoTransactionException, InvalidCustomerException {
         logger.debug("Get Customer Transactions start");
 
         // Authentication Validation

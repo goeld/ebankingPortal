@@ -1,8 +1,8 @@
 package com.mycompany.api.ebankingPortal.customerAccountTransaction;
 
-import com.mycompany.api.ebankingPortal.customer.AccountException;
-import com.mycompany.api.ebankingPortal.customer.CustomerAccountDetails;
-import com.mycompany.api.ebankingPortal.customer.CustomerAccountService;
+import com.mycompany.api.ebankingPortal.exception.CustomerAccountException;
+import com.mycompany.api.ebankingPortal.customerAccount.CustomerAccountDetails;
+import com.mycompany.api.ebankingPortal.customerAccount.CustomerAccountService;
 import com.mycompany.api.ebankingPortal.exception.NoTransactionException;
 import com.mycompany.api.ebankingPortal.transaction.TransactionRequest;
 import com.mycompany.api.ebankingPortal.transaction.TransactionResponse;
@@ -15,7 +15,6 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,7 +35,7 @@ public class CustomerAccountTransactionServiceImpl implements CustomerAccountTra
     private RequestResponseMapper requestResponseMapper = Mappers.getMapper(RequestResponseMapper.class);
 
     @Override
-    public List<CustomerTransactionResponse> getCustomerTransactions(CustomerTransactionRequest customerTransactionRequest, HttpHeaders headers) throws AccountException, NoTransactionException {
+    public List<CustomerTransactionResponse> getCustomerTransactions(CustomerTransactionRequest customerTransactionRequest, HttpHeaders headers) throws CustomerAccountException, NoTransactionException {
         String customerId = customerTransactionRequest.getCustomerId();
         String currency = customerTransactionRequest.getCurrency();
 
@@ -61,13 +60,13 @@ public class CustomerAccountTransactionServiceImpl implements CustomerAccountTra
         return customerTransactionResponses;
     }
 
-    public CustomerAccountDetails getCustomerAccount(String customerId, String currency) throws AccountException, NoTransactionException {
+    public CustomerAccountDetails getCustomerAccount(String customerId, String currency) throws CustomerAccountException, NoTransactionException {
         logger.info("Get customer transaction - starts");
 
         CustomerAccountDetails customerAccountDetails = customerAccountService.getCustomerAccountDetails(customerId, currency);
         if (customerAccountDetails == null) {
             logger.info("No accounts found for the customer.");
-            throw new AccountException("No accounts found for the customer ");
+            throw new CustomerAccountException("No accounts found for the customer ");
         }
         logger.info("Call to get customer accounts is completed");
 
