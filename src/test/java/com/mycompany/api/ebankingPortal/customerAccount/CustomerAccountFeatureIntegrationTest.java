@@ -1,7 +1,6 @@
 package com.mycompany.api.ebankingPortal.customerAccount;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.mycompany.api.ebankingPortal.EbankingPortalApplicationTests;
 import com.mycompany.api.ebankingPortal.authentication.AuthenticationValidationService;
 import com.mycompany.api.ebankingPortal.authentication.CustomerDetails;
 import com.mycompany.api.ebankingPortal.authentication.InvalidCustomerException;
@@ -19,22 +18,15 @@ import io.cucumber.java.en.When;
 import io.cucumber.junit.platform.engine.Cucumber;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import org.mockito.junit.MockitoJUnitRunner;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.client.RestTemplate;
 
 import java.net.URISyntaxException;
@@ -81,9 +73,9 @@ public class CustomerAccountFeatureIntegrationTest {
 
     @When("I request for my accounts")
     public void request_my_accounts() throws NoTransactionException, ForbiddenException, CustomerAccountException, BadRequestException, InvalidCustomerException, URISyntaxException, JsonProcessingException {
-        mock_authentication_validation_service();
         CustomerDetails customerDetails = new CustomerDetails("mock_customer_id");
-        MockRestApiUtils.authenticationApiCall_Error(authenticateUrl, restTemplate, HttpStatus.OK, customerDetails);
+        MockRestApiUtils.authenticationApiCall(authenticateUrl, restTemplate, HttpStatus.OK, customerDetails);
+        mock_authentication_validation_service();
         exceptionMessage = Assertions.assertThrows(Exception.class, () -> {
             controller.getCustomerTransactions(customerTransactionRequest, headers);
         }).getMessage();
@@ -91,27 +83,27 @@ public class CustomerAccountFeatureIntegrationTest {
 
     @When("currency is missing")
     public void currency_is_missing() {
-//        this.customerTransactionRequest.setCurrency(null);
+        this.customerTransactionRequest.setCurrency(null);
     }
 
     @When("I request for my accounts with valid currency")
-    public void request_my_accounts_with_valid_currency() throws NoTransactionException, ForbiddenException, CustomerAccountException, BadRequestException, InvalidCustomerException {
+    public void request_my_accounts_with_valid_currency() throws NoTransactionException, ForbiddenException, CustomerAccountException, BadRequestException, InvalidCustomerException, URISyntaxException, JsonProcessingException {
 
 //        // mock method calls
-////        mock_authentication_validation_service();
+//        CustomerDetails customerDetails = new CustomerDetails("mock_customer_id");
+//        MockRestApiUtils.authenticationApiCall(authenticateUrl, restTemplate, HttpStatus.OK, customerDetails);
+//        mock_authentication_validation_service();
 //        mock_customer_account_txn_service();
-////
-////
-////
-////        this.customerTransactionRequest = this.populateCustomerTransactionRequest();
-////        this.customerTransactionRequest.setCurrency("INR");
+//        this.populateCustomerTransactionRequest();
+//        this.customerTransactionRequest.setCurrency("INR");
+        // TODO - NPE For mocked data.
 //        controller.getCustomerTransactions(customerTransactionRequest, headers);
 
     }
 
     @Then("{string} message is shown to me")
     public void message_is_shown_to_me(String string) {
-//        Assertions.assertEquals(string, this.exceptionMessage);
+        Assertions.assertEquals(string, this.exceptionMessage);
     }
 
     @Then("My accounts are returned")
@@ -139,6 +131,7 @@ public class CustomerAccountFeatureIntegrationTest {
     private List<CustomerTransactionResponse> mock_customer_account_txn_service() {
         try {
             List<CustomerTransactionResponse> responses = new ArrayList<>();
+            MockitoAnnotations.initMocks(this);
             Mockito.when(customerAccountTransactionService.getCustomerTransactions(
                     any(CustomerTransactionRequest.class), any(HttpHeaders.class)
             ))

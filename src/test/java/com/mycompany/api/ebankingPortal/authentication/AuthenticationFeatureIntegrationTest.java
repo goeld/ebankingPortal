@@ -1,7 +1,6 @@
 package com.mycompany.api.ebankingPortal.authentication;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mycompany.api.ebankingPortal.customerAccount.CustomerAccountException;
 import com.mycompany.api.ebankingPortal.customerAccountTransaction.*;
 import com.mycompany.api.ebankingPortal.exception.ApiError;
@@ -23,20 +22,15 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
-import org.springframework.test.web.client.ExpectedCount;
-import org.springframework.test.web.client.MockRestServiceServer;
 import org.springframework.web.client.RestTemplate;
 
 import javax.security.auth.login.AccountException;
-import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
-import static org.springframework.test.web.client.response.MockRestResponseCreators.withStatus;
 
 
 @Cucumber
@@ -125,7 +119,7 @@ public class AuthenticationFeatureIntegrationTest {
 
         // Mock - Authentication Rest API Call
         ApiError error = new ApiError(HttpStatus.NOT_FOUND, "Invalid Request", "No authentication headers");
-        MockRestApiUtils.authenticationApiCall_Error(authenticateUrl, restTemplate, HttpStatus.NOT_FOUND, error);
+        MockRestApiUtils.authenticationApiCall(authenticateUrl, restTemplate, HttpStatus.NOT_FOUND, error);
 
         // Actual Call
         exceptionMessage = Assertions.assertThrows(Exception.class, () -> {
@@ -153,7 +147,7 @@ public class AuthenticationFeatureIntegrationTest {
 
         // Mock - Authentication Rest API Call
         CustomerDetails customerDetails = new CustomerDetails("mock_customer_id");
-        MockRestApiUtils.authenticationApiCall_Error(authenticateUrl, restTemplate, HttpStatus.OK, customerDetails);
+        MockRestApiUtils.authenticationApiCall(authenticateUrl, restTemplate, HttpStatus.OK, customerDetails);
 
         //Mock Service method call
         List<CustomerTransactionResponse> responses = populateCustomerTransactionResponse();

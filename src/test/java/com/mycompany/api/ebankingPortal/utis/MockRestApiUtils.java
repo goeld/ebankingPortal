@@ -23,7 +23,7 @@ public class MockRestApiUtils {
     @Autowired
     private RestTemplate restTemplate;
 
-    public static void authenticationApiCall_Error(String url, RestTemplate restTemplate, HttpStatus status, Object data) throws URISyntaxException, JsonProcessingException {
+    public static void authenticationApiCall(String url, RestTemplate restTemplate, HttpStatus status, Object data) throws URISyntaxException, JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
         MockRestServiceServer mockServer = MockRestServiceServer.createServer(restTemplate);
         mockServer.expect(ExpectedCount.once(),
