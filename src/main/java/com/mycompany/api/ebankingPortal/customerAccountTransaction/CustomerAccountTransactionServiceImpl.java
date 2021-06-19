@@ -1,8 +1,10 @@
 package com.mycompany.api.ebankingPortal.customerAccountTransaction;
 
+import com.mycompany.api.ebankingPortal.authentication.InvalidCustomerException;
 import com.mycompany.api.ebankingPortal.customerAccount.CustomerAccountException;
 import com.mycompany.api.ebankingPortal.customerAccount.CustomerAccountDetails;
 import com.mycompany.api.ebankingPortal.customerAccount.CustomerAccountService;
+import com.mycompany.api.ebankingPortal.exception.BadRequestException;
 import com.mycompany.api.ebankingPortal.transaction.NoTransactionException;
 import com.mycompany.api.ebankingPortal.transaction.TransactionRequest;
 import com.mycompany.api.ebankingPortal.transaction.TransactionResponse;
@@ -35,11 +37,11 @@ public class CustomerAccountTransactionServiceImpl implements CustomerAccountTra
     private RequestResponseMapper requestResponseMapper = Mappers.getMapper(RequestResponseMapper.class);
 
     @Override
-    public List<CustomerTransactionResponse> getCustomerTransactions(CustomerTransactionRequest customerTransactionRequest, HttpHeaders headers) throws CustomerAccountException, NoTransactionException {
+    public List<CustomerTransactionResponse> getCustomerTransactions(CustomerTransactionRequest customerTransactionRequest, HttpHeaders headers) throws CustomerAccountException, NoTransactionException, BadRequestException, InvalidCustomerException {
         String customerId = customerTransactionRequest.getCustomerId();
         String currency = customerTransactionRequest.getCurrency();
 
-        CustomerAccountDetails customerAccountDetails = getCustomerAccount(customerId, currency);
+        CustomerAccountDetails customerAccountDetails = customerAccountService.getCustomerAccountDetails(customerId, currency);
         customerTransactionRequest.setAcctIban(customerAccountDetails.getAccountId());
         List<CustomerTransactionResponse> response = getAccountTransactions(customerTransactionRequest);
         return response;
@@ -58,20 +60,6 @@ public class CustomerAccountTransactionServiceImpl implements CustomerAccountTra
         });
 
         return customerTransactionResponses;
-    }
-
-    public CustomerAccountDetails getCustomerAccount(String customerId, String currency) throws CustomerAccountException, NoTransactionException {
-        logger.info("Get customer transaction - starts");
-
-        CustomerAccountDetails customerAccountDetails = customerAccountService.getCustomerAccountDetails(customerId, currency);
-        if (customerAccountDetails == null) {
-            logger.info("No accounts found for the customer.");
-            throw new CustomerAccountException("No accounts found for the customer ");
-        }
-        logger.info("Call to get customer accounts is completed");
-
-        logger.info("Get customer transaction - ends");
-        return customerAccountDetails;
     }
 
 }
