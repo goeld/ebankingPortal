@@ -11,13 +11,13 @@ import org.mapstruct.factory.Mappers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class CustomerAccountTransactionServiceImpl implements CustomerAccountTransactionService {
@@ -36,12 +36,9 @@ public class CustomerAccountTransactionServiceImpl implements CustomerAccountTra
     private RequestResponseMapper requestResponseMapper = Mappers.getMapper(RequestResponseMapper.class);
 
     @Override
-    public List<CustomerTransactionResponse> getCustomerTransactions(@Valid CustomerTransactionRequest customerTransactionRequest, Map<String, String> headers) throws AccountException, NoTransactionException {
+    public List<CustomerTransactionResponse> getCustomerTransactions(CustomerTransactionRequest customerTransactionRequest, HttpHeaders headers) throws AccountException, NoTransactionException {
         String customerId = customerTransactionRequest.getCustomerId();
         String currency = customerTransactionRequest.getCurrency();
-        if (customerId == null) {
-            //TODO : Throw exception
-        }
 
         CustomerAccountDetails customerAccountDetails = getCustomerAccount(customerId, currency);
         customerTransactionRequest.setAcctIban(customerAccountDetails.getAccountId());

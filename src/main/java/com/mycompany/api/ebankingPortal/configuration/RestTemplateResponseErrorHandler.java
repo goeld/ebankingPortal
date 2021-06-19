@@ -37,6 +37,8 @@ public class RestTemplateResponseErrorHandler implements ResponseErrorHandler {
                 throw new ForbiddenException(error.getError());
             } else if (httpResponse.getStatusCode() == HttpStatus.BAD_REQUEST) {
                 throw new BadRequestException(error.getError());
+            } else if (httpResponse.getStatusCode() == HttpStatus.NOT_FOUND) {
+                throw new NotFoundException(error.getError());
             }
             throw new ServiceProviderException(error.getError());
         }

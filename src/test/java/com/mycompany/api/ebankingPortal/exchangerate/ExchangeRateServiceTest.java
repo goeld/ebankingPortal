@@ -3,9 +3,8 @@ package com.mycompany.api.ebankingPortal.exchangerate;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mycompany.api.ebankingPortal.exception.*;
-import org.junit.Assert;
-import org.junit.Before;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -42,7 +41,7 @@ public class ExchangeRateServiceTest {
     private MockRestServiceServer mockServer;
     private ObjectMapper mapper = new ObjectMapper();
 
-    @Before
+    @BeforeEach
     public void init() {
         mockServer = MockRestServiceServer.createServer(restTemplate);
     }
@@ -70,7 +69,7 @@ public class ExchangeRateServiceTest {
         long diff = actualExchangeRates.entrySet().stream().filter(e ->
                 !mockExchangeRates.get(e.getKey()).equals(e.getValue())
         ).count();
-        Assert.assertEquals(0, diff);
+        Assertions.assertEquals(0, diff);
     }
 
     @Test

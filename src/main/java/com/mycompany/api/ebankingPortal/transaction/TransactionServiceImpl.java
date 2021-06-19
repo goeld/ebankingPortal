@@ -28,7 +28,6 @@ public class TransactionServiceImpl implements TransactionService {
         headers.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity<TransactionRequest> requestEntity = new HttpEntity(transactionRequest, headers);
 
-
         ResponseEntity<List<TransactionResponse>> responseEntity =
                 restTemplate.exchange(accountTransactionServiceUrl,
                         HttpMethod.POST, requestEntity,

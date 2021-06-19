@@ -27,4 +27,9 @@ public class EBankingGlobalExceptionHandler extends ResponseEntityExceptionHandl
         ApiError error = new ApiError(HttpStatus.OK, null, ex.getMessage());
         return new ResponseEntity<ApiError>(error, HttpStatus.OK);
     }
+    @ExceptionHandler(InvalidCustomerException.class)
+    protected ResponseEntity<ApiError> handleInvalidCustomerException(InvalidCustomerException ex, WebRequest request) {
+        ApiError error = new ApiError(HttpStatus.OK, null, ex.getMessage());
+        return new ResponseEntity<ApiError>(error, HttpStatus.OK);
+    }
 }
