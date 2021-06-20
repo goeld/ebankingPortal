@@ -2,11 +2,11 @@ package com.mycompany.api.ebankingPortal.customerAccountTransaction;
 
 import com.mycompany.api.ebankingPortal.authentication.AuthenticationValidationService;
 import com.mycompany.api.ebankingPortal.authentication.CustomerDetails;
-import com.mycompany.api.ebankingPortal.exception.CustomerAccountException;
+import com.mycompany.api.ebankingPortal.customerAccount.CustomerAccountException;
 import com.mycompany.api.ebankingPortal.exception.BadRequestException;
 import com.mycompany.api.ebankingPortal.exception.ForbiddenException;
-import com.mycompany.api.ebankingPortal.exception.InvalidCustomerException;
-import com.mycompany.api.ebankingPortal.exception.NoTransactionException;
+import com.mycompany.api.ebankingPortal.authentication.InvalidCustomerException;
+import com.mycompany.api.ebankingPortal.transaction.NoTransactionException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,12 +43,12 @@ public class CustomerAccountTransactionController {
         CustomerDetails customerDetails = authenticationValidationService.validateAndGetCustomer(headers, customerTransactionRequest.getCustomerId());
 
         // Validate Request Parameters
-        validateCustomerTransactionRequest(customerTransactionRequest, headers);
+        validateCustomerTransactionRequest(customerTransactionRequest);
 
         logger.info("Customer validation is successful, getting customer transactions - start");
         customerTransactionRequest.setCustomerId(customerDetails.getCustomerId());
         List<CustomerTransactionResponse> responses = customerAccountTransactionService.getCustomerTransactions(customerTransactionRequest, headers);
-        logger.info("Customer validation is successful, getting customer transactions - ends");
+        logger.info("Getting customer transactions - ends");
 
         if (CollectionUtils.isEmpty(responses)) {
             logger.error("No transactions found error");
@@ -81,7 +81,7 @@ public class CustomerAccountTransactionController {
         return catr;
     }
 
-    private void validateCustomerTransactionRequest(CustomerTransactionRequest customerTransactionRequest, HttpHeaders headers) throws BadRequestException, InvalidCustomerException {
+    private void validateCustomerTransactionRequest(CustomerTransactionRequest customerTransactionRequest) throws BadRequestException, InvalidCustomerException {
 
         if (customerTransactionRequest.getCurrency() == null || customerTransactionRequest.getCurrency().trim().length() == 0) {
             logger.error("Currency is missing error");

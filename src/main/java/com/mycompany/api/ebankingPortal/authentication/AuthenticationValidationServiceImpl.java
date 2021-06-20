@@ -1,7 +1,6 @@
 package com.mycompany.api.ebankingPortal.authentication;
 
 import com.mycompany.api.ebankingPortal.exception.BadRequestException;
-import com.mycompany.api.ebankingPortal.exception.InvalidCustomerException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

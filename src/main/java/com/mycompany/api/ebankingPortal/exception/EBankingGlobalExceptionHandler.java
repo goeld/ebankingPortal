@@ -1,5 +1,7 @@
 package com.mycompany.api.ebankingPortal.exception;
 
+import com.mycompany.api.ebankingPortal.authentication.InvalidCustomerException;
+import com.mycompany.api.ebankingPortal.transaction.NoTransactionException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;

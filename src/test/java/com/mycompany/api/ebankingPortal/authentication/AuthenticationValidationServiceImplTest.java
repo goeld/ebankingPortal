@@ -3,7 +3,6 @@ package com.mycompany.api.ebankingPortal.authentication;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mycompany.api.ebankingPortal.exception.ApiError;
 import com.mycompany.api.ebankingPortal.exception.BadRequestException;
-import com.mycompany.api.ebankingPortal.exception.InvalidCustomerException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

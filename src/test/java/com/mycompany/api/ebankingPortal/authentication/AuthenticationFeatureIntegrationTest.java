@@ -1,41 +1,41 @@
 package com.mycompany.api.ebankingPortal.authentication;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.mycompany.api.ebankingPortal.exception.CustomerAccountException;
+import com.mycompany.api.ebankingPortal.customerAccount.CustomerAccountException;
 import com.mycompany.api.ebankingPortal.customerAccountTransaction.*;
-import com.mycompany.api.ebankingPortal.exception.*;
+import com.mycompany.api.ebankingPortal.exception.ApiError;
+import com.mycompany.api.ebankingPortal.exception.BadRequestException;
+import com.mycompany.api.ebankingPortal.exception.ForbiddenException;
+import com.mycompany.api.ebankingPortal.transaction.NoTransactionException;
+import com.mycompany.api.ebankingPortal.utis.MockRestApiUtils;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.cucumber.junit.platform.engine.Cucumber;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.Assertions;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
-import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.web.client.ExpectedCount;
-import org.springframework.test.web.client.MockRestServiceServer;
 import org.springframework.web.client.RestTemplate;
 
-import java.net.URI;
+import javax.security.auth.login.AccountException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
-import static org.springframework.test.web.client.response.MockRestResponseCreators.withStatus;
 
 
 @Cucumber
-@RunWith(SpringRunner.class)
+// @RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class AuthenticationFeatureIntegrationTest {
 
     private String exceptionMessage;
@@ -119,16 +119,7 @@ public class AuthenticationFeatureIntegrationTest {
 
         // Mock - Authentication Rest API Call
         ApiError error = new ApiError(HttpStatus.NOT_FOUND, "Invalid Request", "No authentication headers");
-        ObjectMapper mapper = new ObjectMapper();
-        MockRestServiceServer mockServer;
-        mockServer = MockRestServiceServer.createServer(restTemplate);
-        mockServer.expect(ExpectedCount.once(),
-                requestTo(new URI(authenticateUrl)))
-                .andExpect(method(HttpMethod.GET))
-                .andRespond(withStatus(HttpStatus.NOT_FOUND)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .body(mapper.writeValueAsString(error))
-                );
+        MockRestApiUtils.authenticationApiCall(authenticateUrl, restTemplate, HttpStatus.NOT_FOUND, error);
 
         // Actual Call
         exceptionMessage = Assertions.assertThrows(Exception.class, () -> {
@@ -152,19 +143,11 @@ public class AuthenticationFeatureIntegrationTest {
     }
 
     @Then("System should authenticate the request")
-    public void system_authenticate_the_request() throws URISyntaxException, JsonProcessingException, NoTransactionException, CustomerAccountException, ForbiddenException, BadRequestException, InvalidCustomerException {
+    public void system_authenticate_the_request() throws URISyntaxException, JsonProcessingException, NoTransactionException, AccountException, ForbiddenException, BadRequestException, InvalidCustomerException, CustomerAccountException {
 
         // Mock - Authentication Rest API Call
         CustomerDetails customerDetails = new CustomerDetails("mock_customer_id");
-        ObjectMapper mapper = new ObjectMapper();
-        MockRestServiceServer mockServer = MockRestServiceServer.createServer(restTemplate);
-        mockServer.expect(ExpectedCount.once(),
-                requestTo(new URI(authenticateUrl)))
-                .andExpect(method(HttpMethod.GET))
-                .andRespond(withStatus(HttpStatus.OK)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .body(mapper.writeValueAsString(customerDetails))
-                );
+        MockRestApiUtils.authenticationApiCall(authenticateUrl, restTemplate, HttpStatus.OK, customerDetails);
 
         //Mock Service method call
         List<CustomerTransactionResponse> responses = populateCustomerTransactionResponse();
