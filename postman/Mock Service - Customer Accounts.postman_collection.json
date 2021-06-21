@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "3660fd3e-6d97-42f6-b1b1-4cc3760b5c77",
-		"name": "Customer Accounts",
+		"name": "Mock Service - Customer Accounts",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [

@@ -56,15 +56,6 @@ public class AuthenticationValidationServiceImplTest {
     }
 
     @Test
-    public void validateCustomer_throws_InvalidCustomerException_If_AuthHeaders_NotMatching_CustomerId() throws Exception {
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("authorization", "mock_customer_id");
-        Assertions.assertThrows(InvalidCustomerException.class, () -> {
-            service.validateAndGetCustomer(headers, "invalid_customer_id");
-        });
-    }
-
-    @Test
     public void validateCustomer_throws_InvalidCustomerException_If_AuthServiceInvalidate_CustomerId() throws Exception {
 
         // Mock Data

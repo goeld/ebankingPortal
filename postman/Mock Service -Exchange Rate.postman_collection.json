@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "bcec7ada-4ea1-4f9d-a2b8-088eebc52067",
-		"name": "Exchange Rate",
+		"name": "Mock Service -Exchange Rate",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [

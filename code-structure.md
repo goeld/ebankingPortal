@@ -7,8 +7,15 @@ The design uses micro-services principle such that each service is independently
   - /script/ - Folder contains script to do docker build 
   - /k8s/ - Contains configuration files Kubernetes, Deployment, Service, Persistent Volume, 
   - /src/main/ - Application logic
+  - /src/application/health - Contains health checks
+  - /src/authentication - Logic for  calling Authentication RESTful API
+  - /src/configuration - Any Java config classes, Custom bean for Rest template configuration
+  - /src/customerAcount - Logic for calling customer's account RESTfulAPI
+  - /src/exception - Common Exception with custom message, Exception handler  
+  - /src/exchangerate - Logic to call exchange rate RESTful API
+  - /src/transaction - Logic to call transaction RESTful API  
   - /src/test/ - Unit test, Integration tests, Cucumber test cases, 
-  - /postman/ - Contains rest calls collection for services.  
+  - /postman/ - Contains rest calls collection for services to test.  
 * **mock-ebanking-services** Multi Module spring boot Project
     > Manages common dependencies for all the projects. <br> To enable build all the module using one command. <br> Contains DockerFile, Kubernetest configurations, Script file for building
   

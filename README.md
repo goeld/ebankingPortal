@@ -76,27 +76,3 @@
 |Documentation|Solution evolution  | |Completed | |
 |Documentation|Code organisation | |Completed| |
 |Documentation|Relevant Decisions, Assumptions made | |Completed | |
-
-
-
-
-<br >
-<br >
-
-To do
-
-* Diagram of Git progress either from IDE or browser
-* Code
-  * Add Application log statements
-  * Complete unit tests coverage
-  * Add Generic error handling when downstream system has error
-  * Postman collection  
-* Documentation 
-  * How to build application
-  * How to run application in local
-  * How to run application kubernetes
-  * Pre-requiste to run document
-  * How the code is structured  
-    
-
-

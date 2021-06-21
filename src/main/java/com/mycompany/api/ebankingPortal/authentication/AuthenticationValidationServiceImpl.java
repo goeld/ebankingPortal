@@ -35,11 +35,6 @@ public class AuthenticationValidationServiceImpl implements AuthenticationValida
             throw new BadRequestException("Invalid authentication details");
         }
 
-        if (!authorization.get(0).equals(customerId)) {
-            logger.error("Invalid Customer with customerId : {}", customerId);
-            throw new InvalidCustomerException("Invalid Customer");
-        }
-
         try {
             ResponseEntity<CustomerDetails> responseEntity = restTemplate.exchange(authenticateUrl,
                     HttpMethod.GET, null,
