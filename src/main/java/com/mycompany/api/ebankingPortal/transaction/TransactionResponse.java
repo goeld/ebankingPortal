@@ -1,6 +1,7 @@
 package com.mycompany.api.ebankingPortal.transaction;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -8,8 +9,7 @@ import lombok.Setter;
 import java.time.LocalDate;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 public class TransactionResponse {
     private String transactionId;

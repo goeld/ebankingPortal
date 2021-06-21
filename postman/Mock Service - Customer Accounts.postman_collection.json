@@ -1,0 +1,30 @@
+{
+	"info": {
+		"_postman_id": "3660fd3e-6d97-42f6-b1b1-4cc3760b5c77",
+		"name": "Mock Service - Customer Accounts",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get Customer Accounts",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8091/customer/account/P-0123456789",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8091",
+					"path": [
+						"customer",
+						"account",
+						"P-0123456789"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

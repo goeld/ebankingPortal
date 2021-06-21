@@ -1,0 +1,66 @@
+{
+	"info": {
+		"_postman_id": "bcec7ada-4ea1-4f9d-a2b8-088eebc52067",
+		"name": "Mock Service -Exchange Rate",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get All exchange Rate",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"strictSSL": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{mock-server}}:{{mock-port}}/exchange-rate/getAll",
+					"protocol": "http",
+					"host": [
+						"{{mock-server}}"
+					],
+					"port": "{{mock-port}}",
+					"path": [
+						"exchange-rate",
+						"getAll"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get All exchange Rate",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "mock-server:mockport/exchange-rate/getAll",
+							"host": [
+								"mock-server"
+							],
+							"port": "mockport",
+							"path": [
+								"exchange-rate",
+								"getAll"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": [],
+					"cookie": [],
+					"body": null
+				}
+			]
+		}
+	]
+}

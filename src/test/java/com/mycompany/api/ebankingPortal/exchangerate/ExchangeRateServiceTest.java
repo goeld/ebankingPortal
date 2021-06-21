@@ -2,7 +2,10 @@ package com.mycompany.api.ebankingPortal.exchangerate;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.mycompany.api.ebankingPortal.exception.*;
+import com.mycompany.api.ebankingPortal.exception.ApiError;
+import com.mycompany.api.ebankingPortal.exception.BadRequestException;
+import com.mycompany.api.ebankingPortal.exception.ForbiddenException;
+import com.mycompany.api.ebankingPortal.exception.ServiceProviderException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -131,7 +134,7 @@ public class ExchangeRateServiceTest {
                 );
 
         // Actual call
-        Assertions.assertThrows(ServerException.class, () -> {
+        Assertions.assertThrows(ServiceProviderException.class, () -> {
             service.getAllExhangeRates();
         });
     }

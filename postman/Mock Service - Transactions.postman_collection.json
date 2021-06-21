@@ -1,0 +1,38 @@
+{
+	"info": {
+		"_postman_id": "07ab17c5-4386-4dd5-9c60-de1ca2d5272f",
+		"name": "Mock Service - Transactions",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get Transactions",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"acctIban\": \"CH93-0000-0000-93454\",\n    \"txnYear\": 2020,\n    \"txnMonth\" : 10,\n    \"startPage\": 0,\n    \"pageSize\": 5\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{mock-server}}:{{mock-port}}/txn/accountTransactions",
+					"protocol": "http",
+					"host": [
+						"{{mock-server}}"
+					],
+					"port": "{{mock-port}}",
+					"path": [
+						"txn",
+						"accountTransactions"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

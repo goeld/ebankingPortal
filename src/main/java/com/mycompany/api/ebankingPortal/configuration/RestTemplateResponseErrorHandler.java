@@ -30,7 +30,7 @@ public class RestTemplateResponseErrorHandler implements ResponseErrorHandler {
 
         if (httpResponse.getStatusCode()
                 .series() == HttpStatus.Series.SERVER_ERROR) {
-            throw new ServerException(error.getError());
+            throw new ServiceProviderException("Unexpected Error happened, please try again in a while");
         } else if (httpResponse.getStatusCode()
                 .series() == HttpStatus.Series.CLIENT_ERROR) {
             if (httpResponse.getStatusCode() == HttpStatus.FORBIDDEN) {

@@ -24,6 +24,7 @@ public class TransactionServiceImpl implements TransactionService {
 
     @Override
     public List<TransactionResponse> getTransactionAccounts(TransactionRequest transactionRequest) {
+        logger.info("Get transaction, transaction request : {}", transactionRequest);
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity<TransactionRequest> requestEntity = new HttpEntity(transactionRequest, headers);
@@ -33,7 +34,8 @@ public class TransactionServiceImpl implements TransactionService {
                         HttpMethod.POST, requestEntity,
                         new ParameterizedTypeReference<List<TransactionResponse>>() {
                         });
-
-        return responseEntity.getBody();
+        List<TransactionResponse> transactionResponses = responseEntity.getBody();
+        logger.info("Get transaction, transaction response : {}", transactionResponses);
+        return transactionResponses;
     }
 }
