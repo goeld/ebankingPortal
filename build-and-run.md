@@ -1,12 +1,19 @@
 # How to Build and Run
 
 **Summary**
-* Complete maven build.
-* Run as standar spring boot project
+* Maven build
 * Build docker image
-* Run as kubernetes on minikube
-* Refer to the token mentioned in "VALID TOKEN" section. There are three tokens, only those token will work. Other token will not work.
-* Import Postman collection provided will be handy to do a quick test.
+* Run as Spring boot project with profile (local or k8s)
+* Run as k8s cluster on minikube
+* Verify applications are up and running
+  * Verify via Browser
+    * Verify when running as spring boot
+    * Verify when running as K8s
+* Application Functional Verification
+  * Customer-Id & JWT token mappings
+  * Customer and Accounts mappings.
+  * Verification via Postman (Recommended)
+
 
 
 **Prequisites**
@@ -14,28 +21,27 @@
 * Docker engine with k8s or minikube 
 
 
-## Build
+## Maven build
 
-### For both Ebanking/Mock Module
-**maven build**
-  
+For both Ebanking/Mock Module
 ```shell
 $: cd <proejct_dir>
 $: mvn clean install
 ```
 
-**Build artifact checks**
-
-For mock module only jar artifact will be available.
+**Build artifact checks (Only for eBanking Project)**
 * target/cucumber-reports.html - Functional Test report
 * target/site/jacoco/index.html - Code Coverage report
-* Applcation jar file
+* Applcation jar file (Also available for mock services api's)
 
 
-**Build docker image**
+## Build docker image
 
-To build docker image, if you are building and testing with minikube, kubernetes does not pick up from local docker registery. 
-The solution is to point docker registery to minikube before docker image is created with below command. Also, in **note** in the pod definition file you need to mention the ***imagePullPolicy*** as ***Never***. 
+If you are building and testing with minikube, kubernetes does not pick up from local docker registry. 
+The solution is to 
+* Point docker registry to minikube before creating docker image using below command. 
+* Also, in pod definition file you need to mention the ***imagePullPolicy*** as ***Never***. 
+
 ```shell
 $ eval $(minikube docker-env)              # Optional (Required for working with Minikube)
 $ ./scripts/build-docker.sh
@@ -57,7 +63,8 @@ $ docker run -p 8080:8080 ebank-api
 Open your browser and hit http://localhost:8080/ebanking/version
 
 
-## Running as spring boot project
+## Run as Spring boot project with profile (local or k8s).
+**NOTE** For running on local ensure to have the profile set to local.
 ```shell
 $ mvn spring-boot:run -Dspring.run.arguments=--spring.profiles.active=local
 # or
@@ -66,7 +73,7 @@ $ java -jar target/ -Dspring.profiles.active=local
 Open your browser and hit http://localhost:<<port_no>>/ebanking/version
 
 
-## Running on minikube
+## Run as k8s cluster on minikube
 
 Assume you have admin access to cluster and have created the required persistent volumes. Below are the instructions to create PV using minikube
 ```shell
@@ -77,46 +84,47 @@ $ mkdir -p /mnt/data/mock-services
 Exit from minikube terminal
 ```
 
-**Running Kubernetes**
+**Running Kubernetes Cluster and exposing service**
 
 When running the pods using minikube it will require to start the services manually, so the application can be acessible via browser as below
 ```shell
+$ cd <ebanking-api>
 $ kubectl apply -f k8s/
 $ minikube service ebank-api-svc
+
+$ cd <mock-service>
+$ kubectl apply -f k8s/
 $ minikube service mock-services-svc
 ```
 
-## Verify using postman
-Open postman and import all the collection and environment from <ebanking_project_dir>/postman/*.json. The APIs are added per module. Modify the URL's/ports as needed to test the api's as per need.
+## Verify applications are up and running
 
-## Verify on browser
+## Verify via Browser
 The url in local are secure are same when run as spring boot jars or on kubernetes cluster.
 
-***As spring boot***
-* Verify eBanking liveness/Health - https://localhost:8080/actuator/health
-* Verify eBanking Up and running - https://localhost:8080/ebanking/version
-* Verify eBanking Swagger - https://localhost:8080/swagger.html
+### Verify when running as spring boot
+* **eBanking-API service**
+    * Verify eBanking (liveness-probe)/Health - https://localhost:8080/actuator/health
+    * Verify eBanking (readiness-probe)Up and running - https://localhost:8080/ebanking/version
+    * Verify eBanking Swagger - https://localhost:8080/swagger.html
+* **Mock Service APi**
+    * Verify mock-service (liveness-probe)/Health - http://localhost:8091/actuator/health
+    * Verify mock-service (readiness-probe)/Up and running - http://localhost:8091/mock-app/version 
+    * Verify mock-service Swagger - http://localhost:8091/swagger-ui/index.html
 
 
-***As Kubernetes cluster***
-* Verify eBanking liveness/Health - http://localhost:8080/actuator/health
-* Verify eBanking Up and running - http://localhost:8080/ebanking/version
-* Verify eBanking Swagger - http://localhost:8080/swagger.html
+### Verify when running as k8s
+  Same as above springboot, but use http instead of https.
 
+## Application Functional Verification
 
-### Postman (Recommended)
-The set up has been done for each API. This can also be done using swagger.
-Import the collection from postman folder. These should be runnable without any modification.
-
+Endpoint for testing the transaction <br>
+Post https://localhost:8080/ebanking/customer/transactions
 
 
 
-
-
-Other References
----
-### Valid Token
-The token are generated with commands mentioned and are the only tokens acceptec by SSO.
+### Customer-Id & JWT token mappings
+The token are generated with commands mentioned and are the only tokens accepted by SSO. Others will throw an exception
 
 |Customer-Id|EmailId| Token |
 |:-----|:-----|:--------|
@@ -124,6 +132,31 @@ The token are generated with commands mentioned and are the only tokens acceptec
 |P-0123456790|employee2@sp.com|eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyAiY3VzdG9tZXJJZCI6ICJQLTAxMjM0NTY3ODkiICwgImVtYWlsIjoiZW1wbG95ZWUyQHNwLmNvbSJ9.3mJ0aHF21El_bsfBvwIccxvOcg6_qa_KvlJmWC56XuA|
 |P-0123456791|employee3@sp.com|eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyAiY3VzdG9tZXJJZCI6ICJQLTAxMjM0NTY3ODkiICwgImVtYWlsIjoiZW1wbG95ZWUzQHNwLmNvbSJ9.nLxacDiNrEOcvZ-qlGgJ1ugEGNBxTck2AwFBIwZBsS0|
 
+
+### Customer and Accounts mappings.
+|Customer-Id|Account Id| Currency|
+|:-----|:-----|:--------|
+|P-0123456789|CH93-0000-0000-93454|INR|
+|P-0123456789|CH93-0000-0000-93451|SGD|
+|P-0123456789|CH93-0000-0000-93452|USD|
+|P-0123456790|CH93-0000-0000-93459|USD|
+|P-0123456790|CH93-0000-0000-93458|SGD|
+|P-0123456791|CH93-0000-0000-93457|USD|
+
+Customer with id * **P-0123456789** has most of the data, specially for year-2020, Month-10   
+While testing the API with different tokens, remember to change the "Customer ID" in the request body.
+
+### Verification via Postman (Recommended)
+Import postman collections. Open postman and import all the collection and environment from <ebanking_project_dir>/postman/*.json. The APIs are added per module. Modify the URL's/ports as needed to test the api's as per need.
+
+The set up has been done for each API. This can also be done using swagger.
+Import the collection from postman folder. These should be runnable without any modification. For valid tokens refer below,
+For Data, refer to data after token section
+
+
+
+
+## Other References
 ### Generating tokens reference
 Below are the commands to generate the token. Change the payload if you need to have different customers. 
 ```shell

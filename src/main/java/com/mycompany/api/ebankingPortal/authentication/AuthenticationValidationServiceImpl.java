@@ -40,7 +40,7 @@ public class AuthenticationValidationServiceImpl implements AuthenticationValida
                     HttpMethod.GET, null,
                     CustomerDetails.class, authorization);
             logger.debug("Authentication token validated ");
-            return new CustomerDetails(customerId);
+            return new CustomerDetails(responseEntity.getBody().getCustomerId());
         } catch (Exception ex) {
             logger.error("Error Authenticating customer:", ex);
             throw new InvalidCustomerException("Invalid Customer");

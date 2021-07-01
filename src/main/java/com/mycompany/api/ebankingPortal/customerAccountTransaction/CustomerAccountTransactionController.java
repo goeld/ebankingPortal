@@ -43,7 +43,7 @@ public class CustomerAccountTransactionController {
         CustomerDetails customerDetails = authenticationValidationService.validateAndGetCustomer(headers, customerTransactionRequest.getCustomerId());
 
         // Validate Request Parameters
-        validateCustomerTransactionRequest(customerTransactionRequest);
+        validateCustomerTransactionRequest(customerTransactionRequest, customerDetails.getCustomerId());
 
         logger.info("Customer validation is successful, getting customer transactions - start");
         customerTransactionRequest.setCustomerId(customerDetails.getCustomerId());
@@ -81,7 +81,7 @@ public class CustomerAccountTransactionController {
         return catr;
     }
 
-    private void validateCustomerTransactionRequest(CustomerTransactionRequest customerTransactionRequest) throws BadRequestException, InvalidCustomerException {
+    private void validateCustomerTransactionRequest(CustomerTransactionRequest customerTransactionRequest, String customerId) throws BadRequestException, InvalidCustomerException {
 
         if (customerTransactionRequest.getCurrency() == null || customerTransactionRequest.getCurrency().trim().length() == 0) {
             logger.error("Currency is missing error");
@@ -96,6 +96,11 @@ public class CustomerAccountTransactionController {
         if (customerTransactionRequest.getMonth() == null || customerTransactionRequest.getMonth() < 0) {
             logger.error("Invalid Month error");
             throw new BadRequestException("Invalid Month");
+        }
+
+        if (customerTransactionRequest.getCustomerId() == null || !customerTransactionRequest.getCustomerId().equals(customerId)) {
+            logger.error("Invalid Customer error");
+            throw new BadRequestException("Invalid Customer");
         }
     }
 }
